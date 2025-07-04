@@ -4,21 +4,24 @@ import java.time.LocalTime;
 import java.util.Random;
 
 public class surchargeFactory {
-    public static surchargeStrategy getSurchargeStrategy(){
+    public static LocalTime generatedTime;
 
+    public static surchargeStrategy getSurchargeStrategy() {
         Random random = new Random();
-        int hour = random.nextInt(24);   // 0 - 23
-        int minute = random.nextInt(60); // 0 - 59
-        int second = random.nextInt(60); // 0 - 59
+        int hour = random.nextInt(24);
+        int minute = random.nextInt(60);
+        int second = random.nextInt(60);
 
-        LocalTime randomTime = LocalTime.of(hour, minute, second);
+        generatedTime = LocalTime.of(hour, minute, second);
 
-        if (randomTime.getHour() < 6){
+        LocalTime nightStart = LocalTime.of(17, 59, 59);
+        LocalTime nightEnd = LocalTime.of(6, 0, 0);
+
+        if (generatedTime.isAfter(nightStart) || generatedTime.isBefore(nightEnd)) {
+            return new nightSurcharge();
+        } else {
             return new normalSurcharge();
         }
-        else {
-            return new nightSurcharge();
-        }
     }
-
 }
+
