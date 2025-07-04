@@ -8,9 +8,9 @@ public class surchargeFactory {
 
     public static surchargeStrategy getSurchargeStrategy() {
         Random random = new Random();
-        int hour = random.nextInt(24);
-        int minute = random.nextInt(60);
-        int second = random.nextInt(60);
+        int hour = random.nextInt(23);
+        int minute = random.nextInt(59);
+        int second = random.nextInt(59);
 
         generatedTime = LocalTime.of(hour, minute, second);
 
