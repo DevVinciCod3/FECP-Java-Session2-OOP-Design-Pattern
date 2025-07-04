@@ -116,11 +116,17 @@ public class Main {
         }
         rideFareCalculator calculator = new rideFareCalculator(fare, surcharge);
         lastFare = calculator.calculateFare(currentDistance, currentDuration);
-        double baseFare = fare.calculateFare(currentDistance, currentDuration);
+        double distanceCost = fare.getDistanceCost(currentDistance);
+        double durationCost = fare.getDurationCost(currentDuration);
+        double baseFare = distanceCost + durationCost;
         double surchargeAmount = surcharge.getSurcharge();
+
         System.out.println("Base Fare: " + baseFare);
+        System.out.println("Distance Cost: " + distanceCost);
+        System.out.println("Duration Cost: " + durationCost);
         System.out.println("Surcharge: " + surchargeAmount);
         System.out.println("Total Fare: " + lastFare);
+
     }
     private static void viewReceipt() {
         if (currentRideType == null || currentFareType == null) {
